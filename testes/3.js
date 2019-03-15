@@ -50,9 +50,10 @@ async function main() {
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
     var translation = [gl.canvas.width/2, gl.canvas.height/2];
-    var width = 10;
-    var height = 10;
-    var color = [Math.random(), Math.random(), Math.random(), 1];
+    var width = 30;
+    var height = 30;
+    var colorP = [Math.random(), Math.random(), Math.random(), 1];
+    var colorBg = [Math.random(), Math.random(), Math.random(), 1];
 
     drawScene();
 
@@ -66,6 +67,8 @@ async function main() {
         console.log(translation[0]);
         drawScene();
     });
+
+
 
     // Draw a the scene.
     function drawScene() {
@@ -85,7 +88,8 @@ async function main() {
         gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
         // Setup a rectangle
-        setRectangle(gl, translation[0], translation[1], width, height);
+        setRectangle(gl, 10, 10, 2400, 1300);
+        //setRectangle(gl, 20, 110, width, height);
 
         // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         var size = 2;          // 2 components per iteration
@@ -100,11 +104,24 @@ async function main() {
         gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
         // set the color
-        gl.uniform4fv(colorUniformLocation, color);
+        gl.uniform4fv(colorUniformLocation, colorP);
 
         // Draw the rectangle.
         var primitiveType = gl.TRIANGLES;
         var count = 6;
+        gl.drawArrays(primitiveType, offset, count);
+
+        setRectangle(gl, translation[0], translation[1], width, height);
+
+        gl.vertexAttribPointer(
+            positionAttributeLocation, size, type, normalize, stride, offset);
+
+        // set the resolution
+        gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+
+        // set the color
+        gl.uniform4fv(colorUniformLocation, colorBg);
+
         gl.drawArrays(primitiveType, offset, count);
     }
 
