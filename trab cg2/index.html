@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html>
+    <head>
+        <title>Snake Game - O Grupo</title>
+        <script src="gl-matrix.js"></script>
+        <script src="programa.js"></script>
+        <style>
+                canvas {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: auto;
+                    display: block;
+
+                }
+
+                #score{
+                    text-align: center;
+                    margin-top: 190px;
+                }
+
+               
+            </style>
+    </head>
+    <body>
+        <div>
+            <input id="sliderx" type="range" min="0" max="500" step="1"  value="50">
+            <output id="outputx"></output>
+            <input id="slidery" type="range" min="0" max="500" step="1"  value="50">
+            <output id="outputy"></output>
+            <input id="sliderz" type="range" min="0" max="500" step="1"  value="50">
+            <output id="outputz"></output>
+
+        </div>
+        <h1 id="score">Pontos: 0</h1>
+        <canvas
+        height="2500"
+        width="2500"
+        style="border: 1px solid black;"></canvas>
+    </canvas>
+    
+    </body>
+</html>

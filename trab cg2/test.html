@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="slider" type="range" min="0" max="100" step="1"  value="50">
+<output id="output"></output>
+
+</body>
+</html>
+<script>
+    document.getElementById("slider").oninput = function() {
+        sliderFunc()
+    };
+    function sliderFunc() {
+        var slidVal = document.getElementById("slider").value; //gets the oninput value
+        document.getElementById('output').innerHTML = slidVal; //displays this value to the html page
+        console.log(slidVal);
+    }
+</script>
