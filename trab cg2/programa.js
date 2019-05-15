@@ -9,6 +9,7 @@ let kd = 0,
     pos = [0,0,0];
 
 let frame = 0,
+    pause,
     canvas,
     gl,
     vertexShaderSource,
@@ -402,7 +403,10 @@ function render() {
         }
     }
     
-    if(jogoAtivo) window.requestAnimationFrame(render);
+    if(jogoAtivo) {
+        window.requestAnimationFrame(render);
+        document.getElementById("controls").style.display = "none";
+    }
 }
 
 function follow(evt) {
@@ -485,6 +489,17 @@ function sliderFunc() {
     console.log(slidY);
     console.log(slidZ);
 }
+
+function pauseScreen(){
+    window.requestAnimationFrame(render);
+    jogoAtivo = !jogoAtivo;
+    console.log(jogoAtivo);
+    if (!jogoAtivo) {
+        document.getElementById("controls").style.display = "block";
+    }
+}
+
+
 // keypress, keydown, keyup
 window.addEventListener("load", main);
 

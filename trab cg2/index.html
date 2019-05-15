@@ -25,14 +25,16 @@
             </style>
     </head>
     <body>
-        <div>
+        <div id="controls">
             <input id="sliderx" type="range" min="0" max="500" step="1"  value="50">
             <output id="outputx"></output>
             <input id="slidery" type="range" min="0" max="500" step="1"  value="50">
             <output id="outputy"></output>
             <input id="sliderz" type="range" min="0" max="500" step="1"  value="50">
             <output id="outputz"></output>
-
+        </div>
+        <div>
+            <button onclick="pauseScreen()">Pause</button>
         </div>
         <h1 id="score">Pontos: 0</h1>
         <canvas
