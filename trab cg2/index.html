@@ -18,9 +18,9 @@
                 bottom: 0;
                 margin: auto;
                 display: block;
-                background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), white;
-                background: -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), white;
-                background: linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), white;
+                background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 0), -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), green;
+                background: -moz-linear-gradient(45deg, rgba(0, 0, 0, 1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 0), -moz-linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), green;
+                background: linear-gradient(45deg, rgba(0, 0, 0, 1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 1) 75%, rgba(0, 0, 0, 1) 0), linear-gradient(45deg, rgba(0, 0, 0, 0.0980392) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.0980392) 75%, rgba(0, 0, 0, 0.0980392) 0), green;
                 background-repeat: repeat, repeat;
                 background-position: 0px 0, 5px 5px;
                 -webkit-transform-origin: 0 0 0;
@@ -48,6 +48,9 @@
                 margin-bottom: 50px;
                 /*margin-top: 190px;*/
                 font-family: 'VT323', monospace;
+                color: green;
+                font-weight: ;
+
             }
 
             table, th, td {
@@ -81,19 +84,49 @@
                 font-size: 40px;
             }
 
+            .slider {
+                -webkit-appearance: none;
+                width: 20%;
+                height: 15px;
+                background: green;
+                outline: none;
+                border-color: white;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 15px;
+                height: 15px;
+                background: white;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 15px;
+                height: 15px;
+                background: white;
+                cursor: pointer;
+            }
+
+            .output {
+                color: green;
+                font-size: 35px;
+                font-family: 'VT323', monospace;
+            }
+
         </style>
     </head>
     <body>
         <div id="controls">
-            <input id="sliderx" type="range" min="0" max="500" step="1"  value="50">
-            <output id="outputx"></output>
-            <input id="slidery" type="range" min="0" max="500" step="1"  value="50">
-            <output id="outputy"></output>
-            <input id="sliderz" type="range" min="0" max="500" step="1"  value="50">
-            <output id="outputz"></output>
+            <input class="slider" id="sliderx" type="range" min="0" max="500" step="1"  value="50">
+            <output class="output" id="outputx">0</output>
+            <input class="slider" id="slidery" type="range" min="0" max="500" step="1"  value="50">
+            <output class="output" id="outputy">0</output>
+            <input class="slider" id="sliderz" type="range" min="0" max="500" step="1"  value="50">
+            <output class="output" id="outputz">0</output>
         </div>
         <div>
-            <button class="btn pause" onclick="pauseScreen()">||</button>
+            <button class="btn pause" id="pauseBtn" onclick="pauseScreen()">||</button>
         </div>
         <div class="score_div">
             <table id="table_score">

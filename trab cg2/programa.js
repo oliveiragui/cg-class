@@ -505,6 +505,10 @@ function pauseScreen(){
     console.log(jogoAtivo);
     if (!jogoAtivo) {
         document.getElementById("controls").style.display = "block";
+        document.getElementById("pauseBtn").innerHTML = "▶";
+    }
+    else {
+        document.getElementById("pauseBtn").innerHTML = "||";
     }
 }
 
