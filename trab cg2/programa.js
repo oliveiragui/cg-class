@@ -2,14 +2,11 @@
 
 let {mat4, vec4, vec3, vec2} = glMatrix;
 
-const SPEED = 0.8;
-
-let kd = 0, 
+let kd = 0,
     kl = 0, 
     pos = [0,0,0];
 
 let frame = 0,
-    pause,
     canvas,
     gl,
     vertexShaderSource,
@@ -32,7 +29,6 @@ let frame = 0,
     model2,
     appleRandom=true,
     jogoAtivo=true,
-    core = document.getElementById("score"),
     score = 0,
     a=0,
     b=0,
@@ -54,8 +50,8 @@ let frame = 0,
 
 function resize() {
     if (!gl) return;
-    width = 500
-    height = 500
+    width = 500;
+    height = 500;
     canvas.setAttribute("width", width);
     canvas.setAttribute("height", height);
     gl.viewport(0, 0, width, height);
@@ -236,13 +232,13 @@ function getData2() {
 
 async function main() {
     document.getElementById("sliderx").oninput = function() {
-        sliderFunc()
+        sliderControls()
     };
     document.getElementById("slidery").oninput = function() {
-        sliderFunc()
+        sliderControls()
     };
     document.getElementById("sliderz").oninput = function() {
-        sliderFunc()
+        sliderControls()
     };
     // 1 - Carregar tela de desenho
     canvas = getCanvas();
@@ -284,7 +280,7 @@ async function main() {
     gl.enableVertexAttribArray(normalAttr);
     gl.vertexAttribPointer(normalAttr, 3, gl.FLOAT, false, 0, 0);
 
-    //CHAO NEGOCIO
+    // CHAO NEGOCIO
 
     normalAttr = gl.getAttribLocation(shaderProgram, "normal");
     normalBuffer = gl.createBuffer();
@@ -318,7 +314,7 @@ async function main() {
 
     // 7.4 - COLOR UNIFORM
     colorUniform = gl.getUniformLocation(shaderProgram, "color");
-    //gl.uniform2f(locationUniform, loc[0], loc[1]);
+    // gl.uniform2f(locationUniform, loc[0], loc[1]);
 
     // 8 - Chamar o loop de redesenho
     render();
@@ -329,15 +325,12 @@ function render() {
 
     frame ++;
 
-    let time = frame / 100;
-    
     pos[0] += kl;
     pos[1] = 10;
     pos[2] -= kd;
 
     model = mat4.fromTranslation([], pos);
 
-    //eye  = [pos[0] * (-2), 5, pos[2] * (-2)];
     let up = [0, 1, 0];
     let center = [0, 0, 0];
     view = mat4.lookAt([], eye, center, up);
@@ -348,9 +341,9 @@ function render() {
     // gl.POINTS
     // gl.LINES, gl.LINE_STRIP, gl.LINE_LOOP
     // gl.TRIANGLES, gl.TRIANGLE_STRIP, gl.TRIANGLE_FAN 
-    //gl.drawArrays(gl.TRIANGLES, 0, data.points.length / 2);
+    // gl.drawArrays(gl.TRIANGLES, 0, data.points.length / 2);
 
-    //CHAO
+    // CHAO
     gl.uniformMatrix4fv(modelUniform, false, model2);
     gl.uniform3f(colorUniform, color3[0], color3[1], color3[2]);
     gl.drawArrays(gl.TRIANGLES, 0, 36);
@@ -366,10 +359,10 @@ function render() {
     gl.drawArrays(gl.TRIANGLES, 0, 36);
 
     let posAtual = [];
-    posAtual.push(pos[0])
-    posAtual.push(pos[1])
-    posAtual.push(pos[2])
-    snakeXY.push(posAtual)
+    posAtual.push(pos[0]);
+    posAtual.push(pos[1]);
+    posAtual.push(pos[2]);
+    snakeXY.push(posAtual);
     if (snakeXY.length > snakeLength) snakeXY.shift();
 
     snakePlayer();
@@ -379,28 +372,28 @@ function render() {
         Math.floor(pos[2]) >= Math.floor(b)-1 && Math.floor(pos[2]) <= Math.floor(b)+1){
         appleRandom = true;
         score += 100;
-        document.getElementById("score").innerHTML = `Pontos: ${score}`;
+        document.getElementById("score").innerHTML = `Score: ${score}`;
         snakeLength++;
     }
 
     // Limite da tela
-    //Direita
+    // Direita
     if (pos[0] > (width/6.6)) pos[0] = -pos[0]+1;
-    //Baixo
+    // Baixo
     else if (pos[2] > (height/6.6)) pos[2] = -pos[2]+1;
-    //Esquerda
+    // Esquerda
     else if (pos[0] < (-width/6.6)) pos[0] *= (-1);
-    //Cima
+    // Cima
     else if (pos[2] < (-height/6.6)) pos[2] *= (-1);
 
     // Se a posição de dois cubos por igual dá gameover
     for(var i=0; i < snakeXY.length-1; i++){
         if(snakeXY[snakeXY.length-1][0] == snakeXY[i][0] && snakeXY[snakeXY.length-1][2] == snakeXY[i][2]){
-            jogoAtivo=false;
+            jogoAtivo = false;
             alert("Game Over!");
             promptName(score);
             score = 0;
-            document.getElementById("score").innerHTML = `Pontos: ${score}`;
+            document.getElementById("score").innerHTML = `Score: ${score}`;
 
 
             restart();
@@ -431,7 +424,6 @@ function restart(){
     a = Math.random()* (((width/10)-10)  + ((width/10)-10) + 1) - ((width/10)-10);
     b = Math.random()* (((height/10)-10) + ((height/10)-10) + 1) - ((height/10)-10);
     jogoAtivo = true;
-    return;
 }
 
 function keyDown(evt){
@@ -459,8 +451,8 @@ function keyDown(evt){
 }
 
 function apple(){
-    if(appleRandom == true){
-        //randomiza uma posição x e z dentro do tamanho da tela
+    if(appleRandom === true){
+        // randomiza uma posição x e z dentro do tamanho da tela
         a = Math.random()* (((width/10)-10)  + ((width/10)-10) + 1) - ((width/10)-10);
         b = Math.random()* (((height/10)-10) + ((height/10)-10) + 1) - ((height/10)-10);
 
@@ -470,20 +462,14 @@ function apple(){
 }
 
 function snakePlayer(){
-    for(var i=0; i < snakeXY.length; i++){
+    for(let i=0; i < snakeXY.length; i++){
         gl.uniformMatrix4fv(modelUniform, false, mat4.fromTranslation([], snakeXY[i]));
         gl.uniform3f(colorUniform, color2[0], color2[1], color2[2]);
         gl.drawArrays(gl.TRIANGLES, 0, 36); 
     }
 }
 
-function gameover(){
-    for(var i=1; i < snakeXY.length; i++){
-        if(snake[length-1] == snake[i]) return;
-    }
-}
-
-function sliderFunc() {
+function sliderControls() {
     window.requestAnimationFrame(render);
 
     slidX = document.getElementById("sliderx").value;
@@ -494,15 +480,12 @@ function sliderFunc() {
     document.getElementById('outputz').innerHTML = slidZ;
     eye  = [slidX, slidY, slidZ];
 
-    console.log(slidX);
-    console.log(slidY);
-    console.log(slidZ);
 }
 
-function pauseScreen(){
+function pauseControls(){
     window.requestAnimationFrame(render);
     jogoAtivo = !jogoAtivo;
-    console.log(jogoAtivo);
+
     if (!jogoAtivo) {
         document.getElementById("controls").style.display = "block";
         document.getElementById("pauseBtn").innerHTML = "▶";
@@ -512,31 +495,28 @@ function pauseScreen(){
     }
 }
 
-function addRow(tableID, name, text) {
-    // Get a reference to the table
+function addScore(tableID, name, text) {
     let tableRef = document.getElementById(tableID);
 
-    // Insert a row at the end of the table
     let newRow = tableRef.insertRow(-1);
 
-    // Insert a cell in the row at index 0
-    let nome = newRow.insertCell(0);
-    let pontos = newRow.insertCell(1);
+    let player = newRow.insertCell(0);
+    let score = newRow.insertCell(1);
 
-    // Append a text node to the cell
-    let nomeUser = document.createTextNode(name);
-    let pontoUser = document.createTextNode(text);
-    nome.appendChild(nomeUser);
-    pontos.appendChild(pontoUser)
+    let nomePlayer = document.createTextNode(name);
+    let pontoPlayer = document.createTextNode(text);
+
+    player.appendChild(nomePlayer);
+    score.appendChild(pontoPlayer)
 }
 
 function promptName(score){
-    var person = prompt("Please enter your name. Ex: LUK", "LUK");
-    console.log(person);
-    if (person.length > 3)
-        person = person.slice(0, 3);
+    var nickname = prompt("Please enter your name. Ex: LUK", "LUK");
 
-    addRow('table_score', person, score);
+    if (nickname.length > 3)
+        nickname = nickname.slice(0, 3);
+
+    addScore('table_score', nickname, score);
 
 }
 
