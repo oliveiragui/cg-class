@@ -398,6 +398,11 @@ function render() {
         if(snakeXY[snakeXY.length-1][0] == snakeXY[i][0] && snakeXY[snakeXY.length-1][2] == snakeXY[i][2]){
             jogoAtivo=false;
             alert("Game Over!");
+            promptName(score);
+            score = 0;
+            document.getElementById("score").innerHTML = `Pontos: ${score}`;
+
+
             restart();
             
         }
@@ -448,6 +453,8 @@ function keyDown(evt){
     }
     if(evt.key === "P") { 
         snakeLength++;
+        score += 100;
+        document.getElementById("score").innerHTML = `Pontos: ${score}`;
     }
 }
 
@@ -477,6 +484,8 @@ function gameover(){
 }
 
 function sliderFunc() {
+    window.requestAnimationFrame(render);
+
     slidX = document.getElementById("sliderx").value;
     document.getElementById('outputx').innerHTML = slidX;
     slidY = document.getElementById("slidery").value;
@@ -499,6 +508,33 @@ function pauseScreen(){
     }
 }
 
+function addRow(tableID, name, text) {
+    // Get a reference to the table
+    let tableRef = document.getElementById(tableID);
+
+    // Insert a row at the end of the table
+    let newRow = tableRef.insertRow(-1);
+
+    // Insert a cell in the row at index 0
+    let nome = newRow.insertCell(0);
+    let pontos = newRow.insertCell(1);
+
+    // Append a text node to the cell
+    let nomeUser = document.createTextNode(name);
+    let pontoUser = document.createTextNode(text);
+    nome.appendChild(nomeUser);
+    pontos.appendChild(pontoUser)
+}
+
+function promptName(score){
+    var person = prompt("Please enter your name. Ex: LUK", "LUK");
+    console.log(person);
+    if (person.length > 3)
+        person = person.slice(0, 3);
+
+    addRow('table_score', person, score);
+
+}
 
 // keypress, keydown, keyup
 window.addEventListener("load", main);
